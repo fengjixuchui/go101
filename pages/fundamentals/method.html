@@ -13,7 +13,7 @@ In Go, we can (explicitly) declare a method for type <code>T</code> and <code>*T
 where <code>T</code> must satisfy 4 conditions:
 <ol>
 <li>
-	<code>T</code> must be a <a href="type-system-overview.html#non-defined-type">defined type</a>;
+	<code>T</code> must be a <a href="type-system-overview.html#type-definition">defined type</a>;
 </li>
 <li>
 	<code>T</code> must be defined in the same package as the method declaration;
@@ -48,7 +48,7 @@ From the above listed conditions, we will get the conclusions that
 we can never (explicitly) declare methods for:
 <ul>
 <li>
-	built-in basic types, such as <code>int</code> and <code>string</code>,
+	predeclared types, such as <code>int</code> and <code>string</code>,
 	for we can't declare methods in the <code>builtin</code> standard package.
 </li>
 <li>
@@ -56,7 +56,7 @@ we can never (explicitly) declare methods for:
 	Please read <a href="interface.html">the next article</a> for details.
 </li>
 <li>
-	<a href="type-system-overview.html#non-defined-type">non-defined types</a>
+	<a href="type-system-overview.html#named-type">unnamed types</a>
 	except the pointer types with the form <code>*T</code> which are described above.
 </li>
 </ul>
@@ -241,7 +241,7 @@ so a method with the same name <code>Pages</code> is implicitly declared
 for type <code>*Book</code>:
 
 <pre class="line-numbers"><code class="language-go">// Note: this is not a legal Go syntax.
-// It is shown here just for explaination purpose.
+// It is shown here just for explanation purpose.
 // It indicates that the expression (&aBook).Pages
 // is evaluated as aBook.Pages (see below sections).
 func (b *Book) Pages = (*b).Pages
@@ -272,19 +272,19 @@ two implicit functions and one implicit method will also be declared at the same
 </div>
 
 <a class="anchor" id="method-set"></a>
-<h3>Method Prototypes and Method Sets</h3>
+<h3>Method Specifications and Method Sets</h3>
 
 <div>
 
 <p>
-A method prototype can be viewed as a
+A method specification can be viewed as a
 <a href="function.html#prototype">function prototype</a>
 without the <code>func</code> keyword.
 We can view each method declaration is composed of the <code>func</code> keyword,
-a receiver parameter declaration, a method prototype and a method (function) body.
+a receiver parameter declaration, a method specification and a method (function) body.
 </p>
 
-For example, the method prototypes of the <code>Pages</code> and
+For example, the method specifications of the <code>Pages</code> and
 <code>SetPages</code> methods shown above are
 
 <pre class="line-numbers"><code class="language-go">Pages() int
@@ -296,7 +296,7 @@ SetPages(pages int)
 
 <p>
 Each type has a method set.
-The method set of a non-interface type is composed of all the method prototypes
+The method set of a non-interface type is composed of all the method specifications
 of the methods declared, either explicitly or implicitly, for the type,
 except the ones whose names are the blank identifier <code>_</code>.
 Interface types will be explained in
@@ -318,11 +318,11 @@ SetPages(pages int)
 </p>
 
 <p>
-The order of the method prototypes in a method set is not important for the method set.
+The order of the method specifications in a method set is not important for the method set.
 </p>
 
 <p>
-For a method set, if every method prototype in it is also in another method set,
+For a method set, if every method specification in it is also in another method set,
 then we say the former method set is a subset of the latter one, and the latter one is a superset of the former one.
 If two method sets are subsets (or supersets) of each other,
 then we say the two method sets are identical.
@@ -354,7 +354,7 @@ The method sets of the following types are always blank:
 <li>built-in basic types.</li>
 <li>defined pointer types.</li>
 <li>pointer types whose base types are interface or pointer types.</li>
-<li>undefined array, slice, map, function and channel types.</li>
+<li>unnamed array, slice, map, function and channel types.</li>
 </ul>
 
 <p>
@@ -622,8 +622,8 @@ func main() {
 </code></pre>
 </div>
 
-<a class="anchor" id="method-value-normnalization"></a>
-<h3>Method Value Normnalization</h3>
+<a class="anchor" id="method-value-Normalization"></a>
+<h3>Method Value Normalization</h3>
 
 <div>
 
@@ -660,7 +660,7 @@ and <code>p.m</code> is a legal method value expression,
 </ul>
 
 <p>
-Promoted method value Normnalization will be explained in the following
+Promoted method value Normalization will be explained in the following
 <a href="type-embedding.html#method-value-evaluation">type embedding</a> article.
 </p>
 
@@ -743,6 +743,35 @@ func main() {
 
 </div>
 
+<a class="anchor" id="method-obtaining"></a>
+<h3>A Defined Type Doesn't Obtain the Methods Declared Explicitly for the Source Type Used in Its Definition</h3>
+
+<div>
+
+For example, in the following code, unlike the defined type <code>MyInt</code>,
+the defined type <code>Age</code> has not an <code>IsOdd</code> method.
+
+<pre class="line-numbers"><code class="language-go">package main
+
+type MyInt int
+func (mi MyInt) IsOdd() bool {
+	return mi%2 == 1
+}
+
+type Age MyInt
+
+func main() {
+	var x MyInt = 3
+	_ = x.IsOdd() // okay
+	
+	var y Age = 36
+	// _ = y.IsOdd() // error: y.IsOdd undefined
+	_ = y
+}
+</code></pre>
+
+</div>
+
 <h3>Should a Method Be Declared With Pointer Receiver or Value Receiver?</h3>
 
 <p>
@@ -775,7 +804,7 @@ here are some factors needed to be considered to make decisions.
 </li>
 <li>
 	Values of the types in the <code>sync</code> standard package
-	should not be copied, so defining methods with value receivers for
+	should not be copied, so declaring methods with value receivers for
 	struct types which <a href="type-embedding.html">embedding</a>
 	the types in the <code>sync</code> standard package is problematic.
 </li>

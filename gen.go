@@ -6,7 +6,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-	//"errors"
+	"time"
 	"net/http"
 )
 
@@ -30,6 +30,15 @@ func genStaticFiles(rootURL string) {
 			log.Fatal("File web/static/go101 not found. Not run in go101 folder?")
 		}
 		log.Fatal(err)
+	}
+	
+	// md -> html
+	md2htmls := func(group string) {
+		dir := fullPath("pages", group)
+		_, err := runShellCommand(time.Minute/2, dir, "ebooktool", "-md2htmls")
+		if err != nil {
+			log.Fatalln("ebooktool failed to execute in dirrectory", dir)
+		}
 	}
 
 	// load from http server
@@ -153,6 +162,8 @@ func genStaticFiles(rootURL string) {
 				}
 			}
 		}
+		
+		md2htmls(group)
 
 		{
 			dir := fullPath("pages", group)

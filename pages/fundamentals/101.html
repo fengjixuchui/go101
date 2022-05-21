@@ -1,14 +1,19 @@
 ﻿<h1>Go 101</h1>
 
 <p>
-<i>Go 101</i> is a book focusing on Go syntax/semantics and
-all kinds of runtime related things (Go 1.17 ready)
+<i>Go 101</i> is a book focusing on Go syntax/semantics
+(except <a href="../generics/101.html">custom generics</a> related) and
+all kinds of runtime related things (Go 1.18 ready)
 and tries to help gophers gain a deep and thorough understanding of Go.
 This book also collects many details of Go and in Go programming.
 Many of these details could not be found in official Go documentations.
 It is expected that this book is helpful for both beginner and experienced Go programmers.
-(<a href="https://gfw.go101.org/article/101.html">中文版</a>)
 </p>
+
+<p><small><i>
+(Please follow Go 101's official Twitter account <a href="https://twitter.com/go100and1">@go100and1</a>
+to get latest Go 101 news and learn all kinds of Go knowledge.)
+</i></small></p>
 
 <div class="alert alert-success row item-row">
 	<div class="col-xs-12 col-sm-3 text-center" style="font-size: small;">
@@ -23,7 +28,7 @@ It is expected that this book is helpful for both beginner and experienced Go pr
 			<i>$19.99+</i>.
 		</li>
 		<li>
-			<a href="https://books.apple.com/us/book/id1459984231">Apple Books store</a>,
+			<a href="https://books.apple.com/book/id1459984231">Apple Books store</a>,
 			<i>$19.99</i>.
 		</li>
 		<li>
@@ -112,7 +117,7 @@ It is expected that this book is helpful for both beginner and experienced Go pr
 	<i>2019/Oct/18</i>: <a href="https://github.com/golang/go/issues/27821#issuecomment-543611217">An explanation description flaw</a> is found in the
 	<a href="evaluation-orders.html#value-assignment">Evaluation and Assignment Orders in Assignment Statements</a> section
 	in the "Expression Evaluation Orders" article.
-	A simpler description is provoded now.
+	A simpler description is provided now.
 </small></div>
 
 <div class="alert alert-warning"><small>
@@ -130,7 +135,7 @@ It is expected that this book is helpful for both beginner and experienced Go pr
 
 <div class="alert alert-warning"><small>
 	<i>2019/Sep/19</i>: The "named type" and "unnamed type" terminologies are added back in this book.
-	But they are eqivalent to "defined type" and "non-defined type" now.
+	But they are equivalent to "defined type" and "non-defined type" now.
 </small></div>
 
 <div class="alert alert-warning"><small>
@@ -203,13 +208,13 @@ Go Type System
 	<li><a class="index" href="value-part.html">Value Parts</a> - to gain a deeper understanding into Go values.</li>
 	<li><a class="index" href="container.html">Arrays, Slices and Maps</a> - first-class citizen container types.</li>
 	<li><a class="index" href="string.html">Strings</a></li>
-	<li><a class="index" href="function.html">Functions</a> - variadic functions, function types and values.</li>
+	<li><a class="index" href="function.html">Functions</a> - function types and values, including variadic functions.</li>
 	<li><a class="index" href="channel.html">Channels</a> - the Go way to do concurrency synchronizations.</li>
 	<li><a class="index" href="method.html">Methods</a></li>
 	<li><a class="index" href="interface.html">Interfaces</a> - value boxes used to do reflection and polymorphism.</li>
 	<li><a class="index" href="type-embedding.html">Type Embedding</a> - type extension in the Go way.</li>
 	<li><a class="index" href="unsafe.html">Type-Unsafe Pointers</a></li>
-	<li><a class="index" href="generic.html">Built-in Generics</a></li>
+	<li><a class="index" href="generic.html">Generics</a> - use and read composite types</li>
 	<li><a class="index" href="reflection.html">Reflections</a> - the <code>reflect</code> standard package.</li>
 	</ul>
 </li>
@@ -257,7 +262,7 @@ Concurrent Programming
 
 <ul class="index part">
 <li>
-Memory Relateds
+Memory Related
 
 	<ul class="index chapters">
 	<li><a class="index" href="memory-block.html">Memory Blocks</a></li>

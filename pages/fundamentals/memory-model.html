@@ -625,7 +625,7 @@ The standard packages rely extensively on the guarantees provided by atomic oper
 </p>
 
 The following program always prints <code>1</code>,
-if it is compiled with the standard Go compiler 1.17.
+if it compiles with the standard Go compiler 1.18.
 <pre class="line-numbers"><code class="language-go">package main
 
 import "fmt"
@@ -661,7 +661,7 @@ the safe advice is,
 <b>don't rely on atomic to guarantee memory orderings in general Go programming</b>.
 There is <a href="https://github.com/golang/go/issues/5045">an issue</a>
 on how these guarantees should be written down.
-But, up to now (Go 1.17), the decision has not been made yet.
+But, up to now (Go 1.18), the decision has not been made yet.
 </p>
 
 <p>
@@ -680,8 +680,8 @@ https://github.com/golang/go/issues/19182
 https://news.ycombinator.com/item?id=13686863
 For the complexity and subtlety of properly using atomic functions, atomic functions are not recommended
 to synchronize values. Mutexes are more preferred.
-Some Go team members are regreted that the atomic package is expose as a public standard package
-and think the atomic package should only be used inside standard pckages and runtime code.
+Some Go team members are regretted that the atomic package is expose as a public standard package
+and think the atomic package should only be used inside standard packages and runtime code.
 
 https://github.com/golang/go/issues/5045
 https://bartoszmilewski.com/2008/12/01/c-atomics-and-memory-ordering/

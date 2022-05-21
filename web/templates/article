@@ -21,9 +21,10 @@
 		<link href="/static/go101/css/v991-dark.css" rel="stylesheet">
 		<link href="/static/prism/2020-08-03-dark/prism.css" rel="stylesheet">
 		<script src="/static/prism/2020-08-03-dark/prism.js"></script>
-		{{- end -}}
+		{{- end}}
 
 		<script src="/static/jquery/jquery.min-v1.11.2.js"></script>
+		<script src="/static/go101/js/v1.js"></script>
 		<!--[if lt IE 9]>
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -60,65 +61,93 @@
 {{- define "navbar" -}}
 
 {{- $is_fundamentals := (eq .Group "fundamentals") -}}
+{{- $is_generics := (eq .Group "generics") -}}
 {{- $is_optimizations := (eq .Group "optimizations") -}}
 {{- $is_details_and_tips := (eq .Group "details-and-tips") -}}
 {{- $is_quizzes := (eq .Group "quizzes") -}}
+
+{{- $is_apps_and_libs := (eq .Group "apps-and-libs") -}}
+{{- $is_blog := (eq .Group "blog") -}}
 
 {{- $is_index_page := (eq .FilenameWithoutExt "101") -}}
 
 
 <div class="row nav-bar-with-borders">
 	<div class="col-xs-6 col-sm-4 nav-item-inactive">
-		<a href="/">Home</a> <span class="new-text"><sup>new!</sup></span>
+		<a href="/"><small>Home</small></a> <span class="new-text"><sup>new!</sup></span>
 	</div>
 	
 	{{- if and $is_fundamentals $is_index_page -}}
 	<div class="col-xs-6 col-sm-4 nav-item-active">
-		Go 101
+		<small>Go 101</small>
 	</div>
 	{{- else -}}
 	<div class="col-xs-6 col-sm-4 nav-item- {{- if not $is_fundamentals -}} in {{- end -}} active">
-		<a href="/article/101.html">Go 101</a>
+		<a href="/article/101.html"><small>Go 101</small></a>
 	</div>
 	{{- end -}}
 	
-	{{- if and $is_quizzes $is_index_page -}}
+	{{- if and $is_generics $is_index_page -}}
 	<div class="col-xs-6 col-sm-4 nav-item-active">
-		Go Quizzes 101
+		<small>Go Generics 101</small>
 	</div>
 	{{- else -}}
-	<div class="col-xs-6 col-sm-4 nav-item- {{- if not $is_quizzes -}} in {{- end -}} active">
-		<a href="/quizzes/101.html">Go Quizzes 101</a>
+	<div class="col-xs-6 col-sm-4 nav-item- {{- if not $is_generics -}} in {{- end -}} active">
+		<a href="/generics/101.html"><small>Go Generics 101</small></a>
 	</div>
 	{{- end -}}
 	
 	{{- if and $is_details_and_tips $is_index_page -}}
 	<div class="col-xs-6 col-sm-4 nav-item-active">
-		Go Details &amp; Tips 101
+		<small>Go Details &amp; Tips 101</small>
 	</div>
 	{{- else -}}
 	<div class="col-xs-6 col-sm-4 nav-item- {{- if not $is_details_and_tips -}} in {{- end -}} active">
-		<a href="/details-and-tips/101.html">Go Details &amp; Tips 101</a>
+		<a href="/details-and-tips/101.html"><small>Go Details &amp; Tips 101</small></a>
 	</div>
 	{{- end -}}
 	
 	{{- if and $is_optimizations $is_index_page -}}
 	<div class="col-xs-6 col-sm-4 nav-item-active">
-		Go Optimizations 101
+		<small>Go Optimizations 101</small>
 	</div>
 	{{- else -}}
 	<div class="col-xs-6 col-sm-4 nav-item- {{- if not $is_optimizations -}} in {{- end -}} active">
-		<a href="/optimizations/101.html">Go Optimizations 101</a>
+		<a href="/optimizations/101.html"><small>Go Optimizations 101</small></a>
 	</div>
 	{{- end -}}
 	
-	<div class="col-xs-6 col-sm-4 nav-item-inactive" style="color: #ccc;">Go Practices 101</div>
+	{{- if and $is_quizzes $is_index_page -}}
+	<div class="col-xs-6 col-sm-4 nav-item-active">
+		<small>Go Quizzes 101</small>
+	</div>
+	{{- else -}}
+	<div class="col-xs-6 col-sm-4 nav-item- {{- if not $is_quizzes -}} in {{- end -}} active">
+		<a href="/quizzes/101.html"><small>Go Quizzes 101</small></a>
+	</div>
+	{{- end -}}
+	
+	<div class="hidden-xs col-sm-4 nav-item-inactive" style="color: #666;"><small>Go Practices 101</small></div>
+	
+	{{- if and $is_apps_and_libs $is_index_page -}}
+	<div class="col-xs-6 col-sm-4 nav-item-active">
+		<small>Go 101 Apps &amp; Libs</small>
+	</div>
+	{{- else -}}
+	<div class="col-xs-6 col-sm-4 nav-item- {{- if not $is_apps_and_libs -}} in {{- end -}} active">
+		<a href="/apps-and-libs/101.html"><small>Go 101 Apps &amp; Libs</small></a>
+	</div>
+	{{- end -}}
+	
+	<div class="col-xs-6 col-sm-4 nav-item-inactive" style="color: #777;"><small>Go 101 Blog</small></div>
 
 </div>
 
 <div class="alert alert-warning text-center"><small>
-Two new books, <a href="/optimizations/101.html">Go Optimizations 101</a> and
-<a href="/details-and-tips/101.html">Go Details &amp; Tips 101</a>, are published now.
+Three new books, <a href="/optimizations/101.html">Go Optimizations 101</a>,
+<a href="/details-and-tips/101.html">Go Details &amp; Tips 101</a>
+and <a href="/generics/101.html">Go Generics 101</a>
+are published now.
 </small></div>
 <p>
 </p>
@@ -142,9 +171,13 @@ Two new books, <a href="/optimizations/101.html">Go Optimizations 101</a> and
 {{ define "promotions" }}
 
 {{- $is_fundamentals := (eq .Group "fundamentals") -}}
+{{- $is_generics := (eq .Group "generics") -}}
 {{- $is_optimizations := (eq .Group "optimizations") -}}
 {{- $is_details_and_tips := (eq .Group "details-and-tips") -}}
 {{- $is_quizzes := (eq .Group "quizzes") -}}
+
+{{- $is_apps_and_libs := (eq .Group "apps-and-libs") -}}
+{{- $is_blog := (eq .Group "blog") -}}
 
 {{- $not_index_page := (ne .FilenameWithoutExt "101") -}}
 
@@ -192,7 +225,7 @@ The digital versions of this book are available at the following places:
 	<i>$19.99+</i>.
 </li>
 <li>
-	<a href="https://books.apple.com/us/book/id1459984231">Apple Books store</a>,
+	<a href="https://books.apple.com/book/id1459984231">Apple Books store</a>,
 	<i>$19.99</i>.
 </li>
 <li>
@@ -212,15 +245,15 @@ The digital versions of this book are available at the following places:
 <ul>
 <li>
 	<a href="https://leanpub.com/go-optimizations-101">Leanpub store</a>,
-	<i>$5.99+</i>.
+	<i>$6.99+</i>.
 </li>
-<!--li>
-	<a href="https://books.apple.com/us/book/id1459984231">Apple Books store</a>,
-	<i>$5.99</i>.
-</li-->
+<li>
+	<a href="https://books.apple.com/book/id1609924340">Apple Books store</a>,
+	<i>$7.99</i>.
+</li>
 <li>
 	<a href="https://www.amazon.com/dp/B09NT2HJCM">Amazon Kindle store</a>,
-	<i>$5.99</i>.
+	<i>$7.99</i>.
 </li>
 </ul>
 	{{ end -}}
@@ -232,13 +265,31 @@ The digital versions of this book are available at the following places:
 	<a href="https://leanpub.com/go-details-and-tips-101">Leanpub store</a>,
 	<i>$4.99+</i>.
 </li>
-<!--li>
-	<a href="https://books.apple.com/us/book/id1459984231">Apple Books store</a>,
+<li>
+	<a href="https://books.apple.com/book/id1609931638">Apple Books store</a>,
 	<i>$4.99</i>.
-</li-->
+</li>
 <li>
 	<a href="https://www.amazon.com/dp/B09NT56PW8">Amazon Kindle store</a>,
 	<i>$4.99</i>.
+</li>
+</ul>
+	{{ end -}}
+
+	{{- if $is_generics }}
+The digital versions of this book are available at the following places:
+<ul>
+<li>
+	<a href="https://leanpub.com/go-generics-101">Leanpub store</a>,
+	<i>$4.99+</i>.
+</li>
+<li>
+	<a href="https://books.apple.com/book/id1618059315">Apple Books store</a>,
+	<i>$5.99</i>.
+</li>
+<li>
+	<a href="https://www.amazon.com/dp/B09XBQNNF2">Amazon Kindle store</a>,
+	<i>$5.99</i>.
 </li>
 </ul>
 	{{ end -}}

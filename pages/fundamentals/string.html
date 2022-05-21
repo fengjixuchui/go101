@@ -365,7 +365,7 @@ func main() {
 Above has mentioned that the underlying bytes in the conversions
 between strings and byte slices will be copied.
 The standard Go compiler makes some optimizations,
-which are proven to still work in Go Toolchain 1.17,
+which are proven to still work in Go Toolchain 1.18,
 for some special scenarios to avoid the duplicate copies.
 These scenarios include:
 <ul>
@@ -457,7 +457,7 @@ func main() {
 <!--
 https://groups.google.com/forum/#!topic/golang-nuts/EPhPFpuMTWI
 
-fd is not opitimized for the concatration in it is potentially to be appliable for another optimization,
+fd is not optimized for the concatenation in it is potentially to be applicable for another optimization,
 which unluckily ,,,
 -->
 
@@ -639,7 +639,7 @@ func main() {
 
 <div>
 Above has mentioned that comparing two strings is comparing their underlying bytes actually.
-Generally, Go compilers will made the following optimizations for string comparisons.
+Generally, Go compilers will make the following optimizations for string comparisons.
 <ul>
 <li>
 	For <code>==</code> and <code>!=</code> comparisons,
