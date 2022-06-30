@@ -206,7 +206,7 @@ type V interface {[]byte; any}
 type W interface {T; U}
 
 // Z <=> any. Z is a blank interface. Its
-// type set contains all interface types.
+// type set contains all non-interface types.
 type Z interface {~[]byte | ~string | any}
 ```
 
@@ -350,7 +350,7 @@ string | error
 To make descriptions simple, this book will view the predeclared `comparable` interface type
 as an interface type having a method (but not view it as a basic interface type).
 
-Another requirement (restriction) is that the type sets of all non-interface type terms in a term union must have no intersections. For example, in the following code snippet, the term unions in the first two declaration fails to compile, but the last two compile okay.
+Another requirement (restriction) is that the type sets of all non-interface type terms in a term union must have no intersections. For example, in the following code snippet, the term unions in the first declaration fails to compile, but the last two compile okay.
 
 ```Go
 type _ interface {
@@ -366,10 +366,9 @@ type _ interface {
 }
 ```
 
-The four term unions in the above code snippet are equivalent to each other in logic,
+The three term unions in the above code snippet are equivalent to each other in logic,
 which means this restriction is not very reasonable.
-So it might be removed in later Go versions
-(or as earlier as 1.18.x), or become stricter to defeat the workaround.
+So it might be removed in later Go versions, or become stricter to defeat the workaround.
 
 <!--
 https://github.com/golang/go/issues/51607
