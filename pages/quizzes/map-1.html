@@ -1,5 +1,5 @@
 
-<h1>nil 1</h1>
+<h1>map 1</h1>
 
 <div id="question">
 
@@ -7,27 +7,12 @@ What does the following program print?
 
 <pre class="line-numbers"><code class="language-go">package main
 
-var x = *new(*int)
-var y *int = nil
-
-func f() interface{} {
-	return y
-}
-
 func main() {
-	if f() == nil {
-		if x == nil {
-			println("A")
-		} else {
-			println("B")
-		}
-	} else {
-		if x == nil {
-			println("C")
-		} else {
-			println("D")
-		}
-	}
+	m := make(map[string]int, 3)
+	x := len(m)
+	m["Go"] = m["Go"]
+	y := len(m)
+	println(x, y)
 }
 </code></pre>
 </div>
@@ -43,36 +28,38 @@ func main() {
 
 <ul style="list-style-type:none;">
 <li><label for="choiceA">
-	A
+	3 3
 </label></li>
 <li><label for="choiceB">
-	B
+	3 4
 </label></li>
 <li><label for="choiceC">
-	C
+	0 0
 </label></li>
 <li><label for="choiceD">
-	D
+	0 1
 </label></li>
 </ul>
 
 </div>
 
 <div id="answer">
-<p>Answer: C</p>
+<p>Answer: 0 1</p>
 
-<p>Run it on <a href="https://go.dev/play/p/imFfcWS711a" target="_blank">Go play</a>.</p>
+<p>Run it on <a href="https://go.dev/play/p/MwomJeUCT9o" target="_blank">Go play</a>.</p>
 
 <p>Key points:</p>
 <ul>
 <li>
-	An interface value with a nil non-interface dynamic value is not a nil interface.
-	So the function <code>f</code> always return a non-nil interface value.
+	when using the <code>make</code> function to create a map, the second argument
+	is neither the initial length nor the capacity of the result map.
+	It is just a hint for Go runtime to allocate a large enough backing array
+	to hold at least the specified number of entries.
 </li>
 <li>
-	A call to the <code>new<code> builtin function always returns a pointer pointing to a zero value.
-	That means dereferencing the pointer results in a zero value.
-	The zero value of the <code>*int</code> type is nil.
+	The length (number of entries) of the result map is zero.
+	<code>m["Go"] = m["Go"]</code> is equivalent to <code>m["Go"] = 0</code>.
+	After the assignment, the map contains one entry.
 </li>
 </ul>
 
